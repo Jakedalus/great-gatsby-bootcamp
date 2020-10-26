@@ -11,7 +11,9 @@ const IndexPage = () => (
 		<p>
 			Need a developer?{' '}
 			<Link to='/contact'>Contact me</Link>
-			<Link to='/about'>About me</Link>
+		</p>
+		<p>
+			Learn more about me! <Link to='/about'>About me</Link>
 		</p>
 	</div>
 );
