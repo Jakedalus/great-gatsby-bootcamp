@@ -1,5 +1,13 @@
-import React from "react"
+import React from 'react';
 
-export default function Home() {
-  return <div>Hello world!</div>
-}
+const IndexPage = () => (
+	<div>
+		<h1>Hello</h1>
+		<h2>
+			I'm Jake, a full stack developer, living in outer
+			space
+		</h2>
+	</div>
+);
+
+export default IndexPage;
