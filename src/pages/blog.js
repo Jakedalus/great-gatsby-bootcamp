@@ -1,14 +1,11 @@
 import React from 'react';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import Layout from '../components/Layout';
 
 const BlogPage = () => (
-	<div>
-		<Header />
+	<Layout>
 		<h1>Blog</h1>
 		<p>Posts will show up here later on</p>
-		<Footer />
-	</div>
+	</Layout>
 );
 
 export default BlogPage;

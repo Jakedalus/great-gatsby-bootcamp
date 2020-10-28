@@ -1,10 +1,8 @@
 import React from 'react';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import Layout from '../components/Layout';
 
 const ContactPage = () => (
-	<div>
-		<Header />
+	<Layout>
 		<h1>Contact Me</h1>
 		<p>jacquedalus@gmail.com</p>
 		<p>jacob-carpenter.com</p>
@@ -15,8 +13,7 @@ const ContactPage = () => (
 		>
 			@jakedalus
 		</a>
-		<Footer />
-	</div>
+	</Layout>
 );
 
 export default ContactPage;

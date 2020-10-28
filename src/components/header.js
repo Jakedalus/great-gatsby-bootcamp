@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 
 const Header = () => (
 	<header>
+		<h1>Jacob A. Carpenter</h1>
 		<nav>
 			<ul>
 				<li>
