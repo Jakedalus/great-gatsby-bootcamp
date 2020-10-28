@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Footer from '../components/footer';
+import Header from '../components/header';
 
 const IndexPage = () => (
 	<div>
+		<Header />
 		<h1>Hello</h1>
 		<h2>
 			I'm Jake, a full stack developer, living in outer
@@ -15,6 +18,7 @@ const IndexPage = () => (
 		<p>
 			Learn more about me! <Link to='/about'>About me</Link>
 		</p>
+		<Footer />
 	</div>
 );
 
