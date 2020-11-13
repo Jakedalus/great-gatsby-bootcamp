@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, Link } from 'gatsby';
 
 const BlogPage = () => {
 	const data = useStaticQuery(graphql`
@@ -15,6 +15,9 @@ const BlogPage = () => {
 						html
 						excerpt
 						timeToRead
+						fields {
+							slug
+						}
 					}
 				}
 			}
@@ -28,10 +31,12 @@ const BlogPage = () => {
 			<h1>Blog</h1>
 			<p>Posts will show up here later on</p>
 			<ol>
-				{data.allMarkdownRemark.edges.map(post => (
+				{data.allMarkdownRemark.edges.map(edge => (
 					<li>
-						<h2>{post.node.frontmatter.title}</h2>
-						<p>{post.node.frontmatter.date}</p>
+						<Link to={`/blog/${edge.node.fields.slug}`}>
+							<h2>{edge.node.frontmatter.title}</h2>
+							<p>{edge.node.frontmatter.date}</p>
+						</Link>
 					</li>
 				))}
 			</ol>
