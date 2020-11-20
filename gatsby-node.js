@@ -1,27 +1,27 @@
 const { graphql } = require('gatsby');
 const path = require('path');
 
-module.exports.onCreateNode = ({ node, actions }) => {
-	const { createNodeField } = actions;
-	// Transform the new node here and create a new node or
-	// create a new node field.
+// module.exports.onCreateNode = ({ node, actions }) => {
+// 	const { createNodeField } = actions;
+// 	// Transform the new node here and create a new node or
+// 	// create a new node field.
 
-	// console.log('%%%%%%%%%%');
+// 	// console.log('%%%%%%%%%%');
 
-	if (node.internal.type === 'MarkdownRemark') {
-		const slug = path.basename(
-			node.fileAbsolutePath,
-			'.md'
-		);
-		// console.log('slug:', slug);
+// 	if (node.internal.type === 'MarkdownRemark') {
+// 		const slug = path.basename(
+// 			node.fileAbsolutePath,
+// 			'.md'
+// 		);
+// 		// console.log('slug:', slug);
 
-		createNodeField({
-			node,
-			name  : 'slug',
-			value : slug
-		});
-	}
-};
+// 		createNodeField({
+// 			node,
+// 			name  : 'slug',
+// 			value : slug
+// 		});
+// 	}
+// };
 
 module.exports.createPages = async ({
 	graphql,
@@ -32,26 +32,39 @@ module.exports.createPages = async ({
 		'./src/templates/blog.js'
 	);
 
+	// const response = await graphql(`
+	//   query {
+	//     allMarkdownRemark {
+	//       edges {
+	//         node {
+	//           fields {
+	//             slug
+	//           }
+	//         }
+	//       }
+	//     }
+	//   }`);
+
 	const response = await graphql(`
-    query {
-      allMarkdownRemark {
-        edges {
-          node {
-            fields {
-              slug
-            }
-          }
+  {
+    allContentfulBlogPost {
+      edges {
+        node {
+          slug
         }
       }
-    }`);
+    }
+  }`);
 
-	response.data.allMarkdownRemark.edges.forEach(edge => {
-		createPage({
-			component : blogTemplate,
-			path      : `/blog/${edge.node.fields.slug}`,
-			context   : {
-				slug : edge.node.fields.slug
-			}
-		});
-	});
+	response.data.allContentfulBlogPost.edges.forEach(
+		edge => {
+			createPage({
+				component : blogTemplate,
+				path      : `/blog/${edge.node.slug}`,
+				context   : {
+					slug : edge.node.slug
+				}
+			});
+		}
+	);
 };
