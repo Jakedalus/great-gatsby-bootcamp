@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 
 // export const query = graphql`
 // 	query($slug: String) {
@@ -42,14 +43,17 @@ const Blog = props => {
 	);
 
 	const options = {
-		renderNode : {
-			[BLOCKS.EMBEDDED_ASSET]: node => (
-				<img
-					src={node.data.target.fields.file.url}
-					alt={node.data.target.fields.title}
-				/>
-			)
-		}
+		// renderNode : {
+		// 	['embedded-asset-block'] : node => {
+		// 		console.log(node);
+		// 		return (
+		// 			<img
+		// 				src={node.data.target.fields.file.url}
+		// 				alt={node.data.target.fields.title}
+		// 			/>
+		// 		);
+		// 	}
+		// }
 	};
 
 	return (
