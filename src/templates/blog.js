@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 // export const query = graphql`
 // 	query($slug: String) {
@@ -20,6 +21,9 @@ export const query = graphql`
 			title
 			slug
 			publishedDate(formatString: "MMMM Do, YYYY")
+			body {
+				raw
+			}
 		}
 	}
 `;
@@ -27,15 +31,32 @@ export const query = graphql`
 // console.log(query);
 
 const Blog = props => {
+	const doc = JSON.parse(
+		props.data.contentfulBlogPost.body.raw
+	);
+
+	console.log('doc', doc);
+	console.log(
+		'documentToReactComponents',
+		documentToReactComponents
+	);
+
+	const options = {
+		renderNode : {
+			[BLOCKS.EMBEDDED_ASSET]: node => (
+				<img
+					src={node.data.target.fields.file.url}
+					alt={node.data.target.fields.title}
+				/>
+			)
+		}
+	};
+
 	return (
 		<Layout>
 			<h1>{props.data.contentfulBlogPost.title}</h1>
 			<p>{props.data.contentfulBlogPost.publishedDate}</p>
-			{/* <div
-				dangerouslySetInnerHTML={{
-					__html : props.data.markdownRemark.html
-				}}
-			/> */}
+			{documentToReactComponents(doc, options)}
 		</Layout>
 	);
 };
